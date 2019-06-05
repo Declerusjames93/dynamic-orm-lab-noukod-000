@@ -41,10 +41,6 @@ class InteractiveRecord
   end
 
   def values_for_insert
-    #to insert data into db
-    #formats the column names to be used in a SQL statement
-    #use the column_names array, iterate over it to get the attribute names
-    #and then user the attribute = method with send to assign the value
     values_array = []
     self.class.column_names.each do |column_name|
       #get the value for each attribute name
