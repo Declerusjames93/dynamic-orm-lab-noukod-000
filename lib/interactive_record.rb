@@ -39,7 +39,7 @@ class InteractiveRecord
    def values_for_insert
     values = []
     self.class.column_names.each do |col_name|
-    values << "#{send(col_name)}" unless send(col_name).nil?
+    values << "'#{send(col_name)}'" unless send(col_name).nil?
     end
     values.join(", ")
   end
@@ -51,12 +51,12 @@ class InteractiveRecord
   end
 
    def self.find_by_name(name)
-    sql = "SELECT * FROM #{self.table_name} WHERE name = #{name}"
+    sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
 end
 
    def self.find_by(hash)
-    sql = "SELECT * FROM #{self.table_name} WHERE #{hash.keys[0].to_s} = #{hash.values[0].to_s}"
+    sql = "SELECT * FROM #{self.table_name} WHERE #{hash.keys[0].to_s} = '#{hash.values[0].to_s}'"
     DB[:conn].execute(sql)
   end
 
